@@ -29,5 +29,18 @@ factory('DbSelect', ($location)->
         name: @_baseName + '_' + dbName
         url:  @_baseName + '_' + dbName
       }
+
+    setDbConfig: (db, dbs) ->
+      db.main = @getMainDb()
+      splitted = db.main.name.split('-')
+      db.main.instance = splitted.pop()
+      applicationName = splitted.join('-')
+      db.main.appName = applicationName + "-main"
+
+      for dbName in dbs
+        db[dbName] = @getDb(dbName)
+        db[dbName].appName = applicationName + '-' + dbName
+
+      return db
   }
 )
