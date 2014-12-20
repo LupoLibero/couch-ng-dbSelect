@@ -12,7 +12,6 @@ factory('DbSelect', ($location)->
         # vhost case
         # ex: dev.selheure.org -> db: /selheure-dev
         name = app + '-' + $location.host().split('.')[0]
-      console.log name[-5..], name[..-6]
       if name[-5..] == '_main'
         @_baseName = name[..-6]
       else
